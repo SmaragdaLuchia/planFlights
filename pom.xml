@@ -75,38 +75,14 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </path>
-                    </annotationProcessorPaths>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>10.20.1</version>
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/planFlights</url>
-                    <user>${DB_USER}</user>
-                    <password>${DB_PASSWORD}</password>
-                    <cleanDisabled>false</cleanDisabled>
+                    <user>root</user>
+                    <password>${DB_USER}</password>
+                    <cleanDisabled> ${DB_PASSWORD}</cleanDisabled>
                 </configuration>
             </plugin>
             <plugin>
