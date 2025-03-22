@@ -10,10 +10,6 @@ import org.springframework.context.ApplicationContext;
 public class PlanFlightsApplication {
 
     public static void main(String[] args) {
-        ApplicationContext context = SpringApplication.run(PlanFlightsApplication.class, args);
-
-        var flightRepository = context.getBean(FlightRepository.class);
-        var flight = flightRepository.findById(1L).orElse(null);
-        System.out.println(flight.getPrice());
+        SpringApplication.run(PlanFlightsApplication.class, args);
     }
 }

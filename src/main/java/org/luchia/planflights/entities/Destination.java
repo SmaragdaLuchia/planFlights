@@ -1,5 +1,6 @@
 package org.luchia.planflights.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Destination {
     @Column(name = "region")
     private String region;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "destination")
     private Set<Flight> flights = new HashSet<>();
 }

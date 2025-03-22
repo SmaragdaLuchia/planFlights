@@ -80,9 +80,9 @@
                 <version>10.20.1</version>
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/planFlights</url>
-                    <user>root</user>
-                    <password>${DB_USER}</password>
-                    <cleanDisabled> ${DB_PASSWORD}</cleanDisabled>
+                    <user>${USERNAME}</user>
+                    <password>${PASSWORD}</password>
+                    <cleanDisabled>true</cleanDisabled>
                 </configuration>
             </plugin>
             <plugin>
