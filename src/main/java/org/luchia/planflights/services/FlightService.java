@@ -1,5 +1,6 @@
 package org.luchia.planflights.services;
 
+import lombok.AllArgsConstructor;
 import org.luchia.planflights.dto.FlightDTO;
 import org.luchia.planflights.entities.Flight;
 import org.luchia.planflights.repositories.FlightRepository;
@@ -11,14 +12,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
 @Service
 public class FlightService {
 
     private final FlightRepository flightRepository;
-
-    public FlightService(FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
 
 
     public List<FlightDTO> getFlights() {

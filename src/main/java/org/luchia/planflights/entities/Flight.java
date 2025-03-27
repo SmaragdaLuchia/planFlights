@@ -1,9 +1,11 @@
 package org.luchia.planflights.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 @Setter
 @Getter
@@ -28,6 +30,10 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "airline_id")
     private Airline airline;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Seat> seats;
 
 
 }
