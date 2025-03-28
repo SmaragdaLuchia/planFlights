@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Setter
@@ -22,6 +23,8 @@ public class Flight {
     private double price;
     @Column(name = "date")
     private LocalDate date;
+    @Column(name = "dep_time")
+    private LocalTime depTime;
 
     @ManyToOne
     @JoinColumn(name = "destination_id")
@@ -35,5 +38,8 @@ public class Flight {
     @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Seat> seats;
 
+    @ManyToOne
+    @JoinColumn(name = "dep_loc_id")
+    private DepLoc departureLocation;
 
 }

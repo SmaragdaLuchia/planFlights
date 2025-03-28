@@ -12,17 +12,19 @@ import java.util.Set;
 
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, Long> {
-    @Query("SELECT new org.luchia.planflights.dto.FlightDTO(f.id, f.duration, f.price, f.date, d.id, d.name, a.id, a.name) " +
-            "FROM Flight f " +
-            "JOIN f.destination d " +
-            "JOIN f.airline a"
-    )
-    List<FlightDTO> findAllFlights();
-
-    @Query("SELECT new org.luchia.planflights.dto.FlightDTO(f.id, f.duration, f.price, f.date, d.id, d.name, a.id, a.name) " +
+    @Query("SELECT new org.luchia.planflights.dto.FlightDTO(f.id, f.duration, f.price, f.date, d.id, d.name, d.region, a.id, a.name, f.depTime, dep.id, dep.name, dep.region) " +
             "FROM Flight f " +
             "JOIN f.destination d " +
             "JOIN f.airline a " +
+            "JOIN f.departureLocation dep"
+    )
+    List<FlightDTO> findAllFlights();
+
+    @Query("SELECT new org.luchia.planflights.dto.FlightDTO(f.id, f.duration, f.price, f.date, d.id, d.name, d.region, a.id, a.name, f.depTime, dep.id, dep.name, dep.region) " +
+            "FROM Flight f " +
+            "JOIN f.destination d " +
+            "JOIN f.airline a " +
+            "JOIN f.departureLocation dep " +
             "WHERE (:destination IS NULL OR d.name = :destination) " +
             "AND (:airline IS NULL OR a.name = :airline) " +
             "AND (:date IS NULL OR f.date = :date) " +

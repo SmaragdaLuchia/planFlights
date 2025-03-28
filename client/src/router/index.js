@@ -1,10 +1,10 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Home from '../components/HelloWorld.vue'
+import flightBook from '../views/chooseFlightView.vue'
 
 const routes = [
     {
         path: '/',
-        component: Home
+        component: flightBook
     }
 ]
 
