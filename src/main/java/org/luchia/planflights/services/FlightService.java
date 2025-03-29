@@ -2,7 +2,11 @@ package org.luchia.planflights.services;
 
 import lombok.AllArgsConstructor;
 import org.luchia.planflights.dto.FlightDTO;
+import org.luchia.planflights.entities.Airline;
+import org.luchia.planflights.entities.Destination;
 import org.luchia.planflights.entities.Flight;
+import org.luchia.planflights.repositories.AirlineRepository;
+import org.luchia.planflights.repositories.DestinationRepository;
 import org.luchia.planflights.repositories.FlightRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,8 @@ import java.util.Set;
 public class FlightService {
 
     private final FlightRepository flightRepository;
+    private final DestinationRepository destinationRepository;
+    private final AirlineRepository airlineRepository;
 
 
     public List<FlightDTO> getFlights() {
@@ -49,4 +55,7 @@ public class FlightService {
         
         return new ArrayList<>(flights);
     }
+
+    public List<Destination> getAllDestinations() {return destinationRepository.getAllDestinations();}
+    public List<Airline> getAllAirlines() {return airlineRepository.getAllAirlines();}
 }

@@ -1,16 +1,17 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import flightBook from '../views/chooseFlightView.vue'
+import chooseFlightView from '@/views/chooseFlightView.vue'
 
-const routes = [
-    {
-        path: '/',
-        component: flightBook
-    }
-]
+
 
 const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes: [
+        {
+            path: '/',
+            name: 'home',
+            component: chooseFlightView,
+        },
+    ],
 })
 
 export default router
