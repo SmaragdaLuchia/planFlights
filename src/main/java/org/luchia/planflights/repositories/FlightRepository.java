@@ -13,7 +13,14 @@ import java.util.Set;
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
-    Flight findFlightById(Long id);
+    @Query("SELECT new org.luchia.planflights.dto.FlightDTO(f.id, f.duration, f.price, f.date, d.id, d.name, d.region, a.id, a.name, f.depTime, dep.id, dep.name, dep.region) " +
+            "FROM Flight f " +
+            "JOIN f.destination d " +
+            "JOIN f.airline a " +
+            "JOIN f.departureLocation dep " +
+            "WHERE f.id = :id"
+    )
+    FlightDTO findFlightById(@Param("id") Long id);
 
     @Query("SELECT new org.luchia.planflights.dto.FlightDTO(f.id, f.duration, f.price, f.date, d.id, d.name, d.region, a.id, a.name, f.depTime, dep.id, dep.name, dep.region) " +
             "FROM Flight f " +

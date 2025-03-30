@@ -163,13 +163,24 @@ input, select, button {
 
 button {
   width: 320px;
-  background-color: #c0c0c0;
+  background-color: #877876;
   margin-top: 15px;
   margin-bottom: 4px;
+  border-radius: 10px;
+
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+  font-size: 20px;
 }
 
 .priceInput {
   width: 370px;
+}
+
+label {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
 }
 
 </style>

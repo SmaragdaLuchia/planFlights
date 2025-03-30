@@ -25,10 +25,14 @@ const goBookFlight = () => {
 
 <template>
     <div class="flightBody" @click="goBookFlight" >
-      <h3>{{flight.depLoc_name}} -> {{flight.destination_name}}</h3>
-      <p>{{ flight.date }}, {{flight.depTime}}</p>
-      <p>airline: {{ props.flight.airline}}</p>
-      <p>{{ flight.price }}€ per person</p>
+      <div class="container1">
+        <h3 class="text locText">{{flight.depLoc_name}} -> {{flight.destination_name}}</h3>
+        <p class="text">{{ flight.date }}, {{flight.depTime}}</p>
+        <p class="text">airline: {{ props.flight.airline}}</p>
+      </div>
+      <div class="container2">
+        <p class="text price">{{ flight.price }}€</p>
+      </div>
     </div>
 </template>
 
@@ -41,7 +45,7 @@ const goBookFlight = () => {
     margin: 5px;
     width: 80vw;
 
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
 
     cursor: pointer;
@@ -61,6 +65,39 @@ const goBookFlight = () => {
 
   p {
     margin-left: 20px;
+  }
+
+  .text {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+  }
+
+  .locText {
+    margin: 20px 20px 10px 20px;
+    font-weight: 300;
+    font-size: 30px;
+  }
+  .price {
+    align-self: flex-end;
+    font-size: 40px;
+    margin-top: 7vh;
+  }
+
+  .container1 {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .container2 {
+    display: flex;
+    width: 60%;
+    flex-direction: row;
+    justify-content: flex-end;
   }
 
 </style>

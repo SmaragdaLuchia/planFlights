@@ -82,7 +82,7 @@
                     <url>jdbc:mysql://localhost:3306/planFlights</url>
                     <user>root</user>
                     <password>hello123</password>
-                    <cleanDisabled>true</cleanDisabled>
+                    <cleanDisabled>false</cleanDisabled>
                 </configuration>
             </plugin>
             <plugin>

@@ -1,9 +1,10 @@
 services:
-  # Spring Boot backend service
   backend:
     build:
       context: .
       dockerfile: Dockerfile.backend
+      # Uncomment the next line if you are on an M1/M2 Mac and need to force AMD64 images
+      # platform: linux/amd64
     ports:
       - "8080:8080"
     environment:
@@ -13,23 +14,21 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - db
-    # Optionally, you can use a volume to persist the target artifacts across restarts
-    volumes:
-      - ./target:/app/target
 
-  # Vue frontend service
   frontend:
     build:
       context: .
       dockerfile: Dockerfile.frontend
+      # Uncomment the next line if you are on an M1/M2 Mac and need to force AMD64 images
+      # platform: linux/amd64
     ports:
       - "80:80"
     depends_on:
       - backend
 
-  # MySQL database service
   db:
     image: mysql:8.0
+    platform: linux/amd64
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: yourdatabase

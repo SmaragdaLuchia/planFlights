@@ -117,7 +117,7 @@ onMounted(fetchData)
     </div>
     <div class="suggestionContainer">
       <div class="flightInfoContainer">
-        <h1 v-if="flight">{{ flight.departureLocation }} -> {{ flight.destination.name }}</h1>
+        <h1 v-if="flight">{{ flight.depLoc_name }} -> {{ flight.destination_name }}</h1>
         <h1 v-else>Loading flight data...</h1>
 
         <p v-if="flight" class="text">{{ flight.date }}, {{ flight.depTime }}</p>
@@ -200,10 +200,11 @@ onMounted(fetchData)
 h1 {
   font-family: 'Rubik', sans-serif;
   font-weight: 300;
-  font-size: 65px;
+  font-size: 60px;
 
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 0px;
 }
 
 .seatPlan {
@@ -338,14 +339,9 @@ button {
   color: white;
 }
 
-input[type="checkbox"] {
-
-}
-
 .checkBox {
   width: 20px;
   height: 20px;
-
   margin: 10px 10px 10px 20px;
 }
 

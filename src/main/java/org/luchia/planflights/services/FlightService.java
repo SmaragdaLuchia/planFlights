@@ -59,5 +59,5 @@ public class FlightService {
     public List<Destination> getAllDestinations() {return destinationRepository.getAllDestinations();}
     public List<Airline> getAllAirlines() {return airlineRepository.getAllAirlines();}
 
-    public Flight getFlightById(Long id) {return flightRepository.findFlightById(id);}
+    public FlightDTO getFlightById(Long id) {return flightRepository.findFlightById(id);}
 }
