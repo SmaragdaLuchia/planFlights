@@ -9,7 +9,6 @@ export default {
   data() {
     return {
       selectedDate: null,
-      selectedDuration: null,
       selectedDestination: null,
       selectedAirline: null,
       selectedMaxPrice: null,
@@ -18,12 +17,13 @@ export default {
       airlines: [],
       filteredFlights: [],
 
-      priceFloat: true
     };
   },
   methods: {
     filterFlights() {
       const url = `http://localhost:8080/flights/search?${this.getQueryParams()}`
+      console.log("Query Parameters:", url);
+
       axios.get(url)
           .then(response => {
             console.log("Fetching filtered flights");
@@ -43,12 +43,6 @@ export default {
       return !isNaN(value) && !isNaN(parseFloat(value));
     },
     formatData() {
-      if (this.selectedDuration) {
-        const hours = this.selectedDuration.hours;
-        console.log(hours)
-        const minutes = this.selectedDuration.minutes;
-        this.selectedDuration = (hours * 60) + minutes;
-      }
       if (this.selectedDate) {
         const date = new Date(this.selectedDate);
         const year = date.getFullYear();
@@ -57,17 +51,13 @@ export default {
 
         this.selectedDate = `${year}-${month}-${day}`;
       }
-      if (!this.priceIsFloat()) {
-        this.priceFloat = false
-      }
+
     },
     getQueryParams() {
       this.formatData()
-      if (this.priceIsFloat()) {
         const filters = [
           {name: 'maxPrice', value: this.selectedMaxPrice, queryParam: 'price'},
           {name: 'airline', value: this.selectedAirline, queryParam: 'airline'},
-          {name: 'duration', value: this.selectedDuration, queryParam: 'duration'},
           {name: 'date', value: this.selectedDate, queryParam: 'date'},
           {name: 'destination', value: this.selectedDestination, queryParam: 'destination'}
         ];
@@ -76,7 +66,7 @@ export default {
             .map(filter => `${filter.queryParam}=${encodeURIComponent(filter.value)}`)
             .join('&');
       }
-    }
+
   },
   mounted() {
     axios.get('http://localhost:8080/flights/destinations')
@@ -121,19 +111,18 @@ export default {
       </select>
     </div>
     <div class="container">
-      <label for="duration">Select Duration:</label>
-      <Datepicker v-model="selectedDuration" time-picker format="HH:mm"/>
       <label>Select date:</label>
       <Datepicker v-model="selectedDate" :min-date="new Date()" :enable-time-picker="false" />
-    </div>
-    <div class="container">
       <label for="maxPrice">Select maximum price:</label>
       <input
+          class="priceInput"
           id="maxPrice"
           type="number"
           v-model.number="selectedMaxPrice"
           min="0"
       />
+    </div>
+    <div class="container">
       <button @click="filterFlights">Search</button>
     </div>
   </div>
@@ -171,13 +160,16 @@ input, select, button {
   cursor: pointer;
 }
 
+
 button {
-  width: 340px;
+  width: 320px;
   background-color: #c0c0c0;
   margin-top: 15px;
   margin-bottom: 4px;
 }
 
-
+.priceInput {
+  width: 370px;
+}
 
 </style>

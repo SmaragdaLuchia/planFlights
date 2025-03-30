@@ -1,5 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import chooseFlightView from '@/views/chooseFlightView.vue'
+import BookView from "@/views/BookView.vue";
 
 
 
@@ -11,6 +12,12 @@ const router = createRouter({
             name: 'home',
             component: chooseFlightView,
         },
+        {
+            path: '/bookFlight',
+            name: 'book',
+            component: BookView,
+        },
+
     ],
 })
 

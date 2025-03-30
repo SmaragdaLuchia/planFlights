@@ -50,4 +50,14 @@ public class FlightController {
         return airlines.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(airlines);
     }
 
+    @GetMapping("/getFlight/{flightId}")
+    public ResponseEntity<Flight> getFlightById(@PathVariable Long flightId) {
+        Flight flight = flightService.getFlightById(flightId);
+        if (flight == null) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.ok(flight);
+        }
+    }
+
 }

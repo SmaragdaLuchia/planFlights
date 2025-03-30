@@ -1,6 +1,6 @@
 create table seats
 (
-    seatNr      int not null unique ,
+    seatNr      int not null,
     byWindow    boolean default false not null,
     nearExit    boolean default false not null,
     moreLegRoom boolean default false not null,
