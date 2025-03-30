@@ -7,11 +7,13 @@ import router from "@/router";
 const route = useRoute();
 const flightId = route.query.flightId
 
-
 const seats = ref([])
 const flight = ref(null);
-
 const pickedSeat = ref(null);
+
+const requestByWindow = ref(false)
+const requestMoreLegroom = ref(false)
+const requestNearExit = ref(false)
 
 const bookSeat = async (seatNr) => {
   try {
@@ -22,6 +24,31 @@ const bookSeat = async (seatNr) => {
   } catch (error) {
     console.error("Error booking seat:", error);
   }
+}
+
+const isSuggested = (byWindow, moreLegroom, nearExit) => {
+  if (requestByWindow.value) {
+    if (!byWindow) {
+      return false
+    }
+  }
+  if (requestMoreLegroom.value) {
+    if (!moreLegroom) {
+      return false
+    }
+  }
+  if (requestNearExit.value) {
+    if (!nearExit) {
+      return false
+    }
+  }
+
+  return (requestByWindow.value || requestMoreLegroom.value || requestNearExit.value);
+
+}
+
+const cancelBook = () => {
+  router.push({path: '/'});
 }
 
 const setSeat = (seatToBePicked) => {
@@ -80,7 +107,7 @@ onMounted(fetchData)
              :byWindow="seat.byWindow"
              :nearExit="seat.nearExit"
              :moreLegRoom="seat.moreLegRoom"
-             :class="['seat', {'occupied' : seat.occupied, 'picked' : seat.seatNr === pickedSeat}]"
+             :class="['seat', {'occupied' : seat.occupied, 'picked' : seat.seatNr === pickedSeat, 'suggested' : !seat.occupied && isSuggested(seat.byWindow, seat.moreLegRoom, seat.nearExit)}]"
              @click="setSeat(seat)"
              >
           {{seat.seatNr}}
@@ -107,20 +134,20 @@ onMounted(fetchData)
       <div class="suggestion">
         <p class="text preferencesText">Pick your preferences</p>
         <label class="text">
-         <input type="checkbox" v-model="byWindow" class="checkBox">
+         <input type="checkbox" v-model="requestByWindow" class="checkBox">
           Seat by window
         </label>
         <label class="text">
-          <input type="checkbox" v-model="byWindow" class="checkBox">
+          <input type="checkbox" v-model="requestMoreLegroom" class="checkBox">
           Premium legroom
         </label>
         <label class="text">
-          <input type="checkbox" v-model="byWindow" class="checkBox">
+          <input type="checkbox" v-model="requestNearExit" class="checkBox">
           Seat near exit
         </label>
       </div>
       <div class="buttonContainer">
-        <button>GET SUGGESTIONS</button>
+        <button @click="cancelBook">CANCEL</button>
         <button class="bookButton" @click="bookSeat(pickedSeat)">BOOK</button>
       </div>
     </div>

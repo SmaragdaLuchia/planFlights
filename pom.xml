@@ -81,8 +81,8 @@
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/planFlights</url>
                     <user>root</user>
-                    <password>${USERNAME}</password>
-                    <cleanDisabled>${PASSWORD}</cleanDisabled>
+                    <password>hello123</password>
+                    <cleanDisabled>true</cleanDisabled>
                 </configuration>
             </plugin>
             <plugin>
