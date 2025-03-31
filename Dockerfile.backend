@@ -1,14 +1,14 @@
-# Use a Java runtime
-FROM openjdk:17-jdk
-
-# Set working directory
+# Stage 1: Build the application
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the JAR built from Maven/Gradle (make sure to run the build first)
-COPY target/*.jar backend.jar
-
-# Expose the port (Spring Boot default is usually 8080)
+# Stage 2: Create the runtime image
+FROM eclipse-temurin:21-jdk
+WORKDIR /app
+# Copy the JAR file from builder stage with exact name
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Run the Spring Boot application
-ENTRYPOINT ["java", "-jar", "backend.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
